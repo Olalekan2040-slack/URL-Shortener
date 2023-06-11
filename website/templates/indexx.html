@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Welcome to My URL Shortener</h1>
+            <p class="lead">Shorten your long URLs with just a click!</p>
+            <h3> Long URL </h3>
+            <input 
+            type="text" 
+            name="longurl"
+            placeholder="input your URL here"/>  
+         </div> 
+            <p><a href="#" class="btn btn-primary">Shorten a URL</a></p>
+            <p><a href="{{ url_for('auth.login') }}" class="btn btn-primary">Log in to Shorten URLs</a></p>
+        </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='img/url_shortener.png') }}" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock %}
