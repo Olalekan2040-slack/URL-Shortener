@@ -1,9 +1,7 @@
-from flask import Flask, render_template, request, redirect
-import string
-import random
+from flask import Flask, render_template, request, redirect, Blueprint
+import string, random
 
-app = Flask(__name__)
-
+url_shortener = Blueprint('url_shortener', __name__)
 # In-memory dictionary to store shortened URLs
 url_dict = {}
 
@@ -12,7 +10,7 @@ def generate_short_url():
     short_url = ''.join(random.choice(characters) for _ in range(6))
     return short_url
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
 def shorten_url():
     if request.method == 'POST':
         long_url = request.form['long_url']
@@ -21,12 +19,9 @@ def shorten_url():
         return render_template('result.html', short_url=short_url)
     return render_template('index.html')
 
-@app.route('/<string:short_url>')
+# @app.route('/<string:short_url>')
 def redirect_to_long_url(short_url):
     long_url = url_dict.get(short_url)
     if long_url:
         return redirect(long_url)
     return 'Invalid or expired URL'
-
-if __name__ == '__main__':
-    app.run(debug=True)
