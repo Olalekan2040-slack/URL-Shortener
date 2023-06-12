@@ -15,8 +15,6 @@ class User(db.Model, UserMixin):
     is_active = db.Column(db.Boolean, default=True)
     urls = db.relationship('URL', backref='user', lazy=True)
 
-
-
     def get_id(self):
         return str(self.id)
 
@@ -30,9 +28,10 @@ class URL(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     clicks = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    clicks = db.relationship('Click', backref='url', lazy=True)
-    barcode = db.Column(db.LargeBinary, nullable=True)  # Binary representation of the barcode image
+    owner = db.relationship('User', backref='owner_urls')
 
+    def __repr__(self):
+        return f"URL('{self.original_url}', '{self.short_url}', '{self.created_at}')"
 
 class Click(db.Model):
     id = db.Column(db.Integer, primary_key=True)

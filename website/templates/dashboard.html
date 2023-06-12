@@ -1,3 +1,5 @@
+{%extends"base.html" %} {% block title%}Login{% endblock%}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,16 +7,15 @@
 </head>
 <body>
     <h1>URL Shortener</h1>
-    <form method="POST" action="/">
+    <form method="POST" action="{{ url_for('views.dashboard') }}">
         <input type="text" name="long_url" placeholder="Enter your long URL" required>
         <input type="submit" value="Shorten">
     </form>
-    <span><p id="result"></p></span>
 
-    <script>
-        // Add this script to update the <p> tag with the name 'result'
-        var resultElement = document.getElementById("result");
-        resultElement.textContent = "{{ short_url }}";
-    </script>
+    <div>
+        {% if short_url %}
+            <p>Your shortened URL is: <a href="{{ short_url }}">{{ short_url }}</a></p>
+        {% endif %}
+    </div>
 </body>
 </html>
