@@ -1,5 +1,5 @@
 
-*.instance/
+.instance/
 env
-*.__pycache__/
-*.alembic
+__pycache__/
+alembic
