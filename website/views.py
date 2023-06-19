@@ -23,7 +23,6 @@ def generate_short_url():
 
 
 @views.route('/dashboard', methods=['GET', 'POST'])
-@login_required
 def dashboard():
     if request.method == 'POST':
         long_url = request.form['long_url']
