@@ -5,7 +5,6 @@ from flask_alembic import Alembic
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_qrcode import QRcode
-import psycopg2
 
 
 
@@ -18,8 +17,9 @@ qrcode = QRcode()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'ally'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://scissors_user:56UrctchR8HhrK0Vpw4LWuRCyceEyeD9@dpg-ci907at9aq0dcs9uuqk0-a/scissors'
-    # 'sqlite:///{}'.##format(DB_NAME)  # Fix the format string
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(DB_NAME)  # Fix the format string
+    'postgres://scissors_user:56UrctchR8HhrK0Vpw4LWuRCyceEyeD9@dpg-ci907at9aq0dcs9uuqk0-a/scissors'
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     alembic.init_app(app)
