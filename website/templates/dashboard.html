@@ -1,10 +1,13 @@
 {%extends"base.html" %} {% block title%}Dashboard{% endblock%}
+{%block navbar%}  {%endblock%}
 {%block hero%}  {%endblock%}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>URL Shortener</title>
+    <title>Dashboard</title>
 </head>
+{%block content%}
 <body>
     <h1>URL Shortener</h1>
     <form method="POST" action="{{ url_for('views.dashboard') }}">
@@ -18,4 +21,5 @@
         {% endif %}
     </div>
 </body>
+{%endblock%}
 </html>

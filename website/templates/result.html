@@ -5,8 +5,12 @@
 </head>
 <body>
     <h1>URL Shortener - Result</h1>
+    <p>Your QrCode is: </p>
+    <a href="{{short_url_qr}}"> {{short_url_qr}} </a>
+
     <p>Your shortened URL:</p>
     <a href="{{ short_url }}">{{ short_url }}</a>  <!-- Display shortened URL as a hyperlink -->
+    
     <br><br>
     <p>Click the link to redirect to the original URL.</p>
 </body>

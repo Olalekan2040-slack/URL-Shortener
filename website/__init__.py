@@ -4,11 +4,14 @@ from os import path
 from flask_alembic import Alembic
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_qrcode import QRcode
+
 
 db = SQLAlchemy()
 alembic = Alembic()
 migrate = Migrate()
 DB_NAME = "database.db"
+qrcode = QRcode()
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +21,7 @@ def create_app():
     db.init_app(app)
     alembic.init_app(app)
     migrate.init_app(app, db)
+    qrcode.init_app(app)
 
     from .views import views
     from .auth import auth
@@ -27,6 +31,7 @@ def create_app():
 
 
     from .models import URL, User, Click
+    
 
 
     create_tables(app)
