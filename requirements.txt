@@ -16,4 +16,4 @@ SQLAlchemy==2.0.12
 typing_extensions==4.5.0
 Werkzeug
 gunicorn
-Flask-QRcode==2.1.2
+Flask-QRcode
