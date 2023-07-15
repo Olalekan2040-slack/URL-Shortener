@@ -5,6 +5,8 @@ from flask_alembic import Alembic
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_qrcode import QRcode
+import psycopg2
+
 
 
 db = SQLAlchemy()
@@ -16,12 +18,24 @@ qrcode = QRcode()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'ally'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(DB_NAME)  # Fix the format string
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://scissors_user:56UrctchR8HhrK0Vpw4LWuRCyceEyeD9@dpg-ci907at9aq0dcs9uuqk0-a/scissors'
+    # 'sqlite:///{}'.##format(DB_NAME)  # Fix the format string
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     alembic.init_app(app)
     migrate.init_app(app, db)
     qrcode.init_app(app)
+
+
+    #connection test
+    # with app.app_context():
+    #     conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
+    #     cursor = conn.cursor()
+    #     cursor.execute("SELECT version();")
+    #     result = cursor.fetchone()
+    #     print("PostgreSQL version:", result[0])
+    #     cursor.close()
+    #     conn.close()
 
     from .views import views
     from .auth import auth
@@ -31,7 +45,7 @@ def create_app():
 
 
     from .models import URL, User, Click
-    
+
 
 
     create_tables(app)
