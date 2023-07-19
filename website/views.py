@@ -4,6 +4,7 @@ import random, string
 from flask_login import login_required, current_user
 from io import BytesIO
 import qrcode
+import base64
 
 
 views = Blueprint('views', __name__)
@@ -35,10 +36,12 @@ def generate_qr(data):
     img_io = BytesIO()
     img.save(img_io, 'PNG')
     img_io.seek(0)
+    img_base64 = base64.b64encode(img_io.getvalue()).decode('utf-8')
 
-    return img_io.getvalue()
+    return img_base64
 
 @views.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
     if request.method == 'POST':
         long_url = request.form['long_url']
@@ -65,6 +68,7 @@ def result():
 
 
 @views.route('/<string:short_url>', methods=['GET'])
+@login_required
 def redirect_to_url(short_url):
     long_url = url_dict.get(short_url)
     if long_url:
