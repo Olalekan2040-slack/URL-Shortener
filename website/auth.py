@@ -35,13 +35,25 @@ def signup_post():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    user = User.query.filter_by(email=email).first()
-
+    user = User.query.filter_by(username=username).first()
     if user:
-        flash('Email address already exists')
+        flash('Usernane already exists')
         return redirect(url_for('auth.signup'))
+    
+    email_exists = User.query.filter_by(email=email).first()
+    if email_exists:
+        flash("This email is already registered.")
+        return redirect(url_for('auth.signup'))
+    
+
+    if len(email) == 0:
+        flash('Email cannot be empty', category='error')
     elif len(password) < 7:
         flash('Password must be greater than 7 characters.', category='error')
+    elif len(username) == 0:
+        flash('Username cannot be empty', category='error')
+    elif len(username) <= 3:
+        flash("Username cannot be lesser than 3 characters", category='error')
     else:
         new_user = User(username=username, email=email, password=generate_password_hash(password, method='sha256'))
 
@@ -54,4 +66,4 @@ def signup_post():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('auth.login'))

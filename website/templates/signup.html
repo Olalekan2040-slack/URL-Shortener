@@ -1,7 +1,7 @@
 {%extends"base.html" %} {% block title%}Sign Up{% endblock%}
 
 {%block navbar%}
-<header id="header" class="fixed-top ">
+<header id="header" class="fixed-top " style="background-color: #37517e;">
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto"><a href="index.html">Scissors</a></h1>
@@ -10,7 +10,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{{url_for('views.login')}}">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{url_for('auth.login')}}">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
@@ -22,12 +22,8 @@
 {%endblock%}
 
 {%block hero%} {%endblock%}
-<br>
-<br>
-
+<
 {%block content%}
-<br>
-
 <form method="POST">
     <section class="vh-100" style="background-color:  #37517e;">
         <div class="container py-5 h-100">
@@ -61,11 +57,6 @@
       
                   <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button>
                   <div align="center">
-                    <small>
-                      Already have an account? <a href="{{url_for('auth.login')}}">Sign in</a>
-                    </small>
-                    </div>
-      
                 </div>
               </div>
             </div>
