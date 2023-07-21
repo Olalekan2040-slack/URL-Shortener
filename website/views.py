@@ -3,9 +3,10 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 import random, string
 from flask_login import login_required, current_user
 from io import BytesIO
-import qrcode
 import base64
-
+from website import cache
+from .models import ClickTime, URL
+import qrcode
 
 views = Blueprint('views', __name__)
 
@@ -52,22 +53,39 @@ def dashboard():
 
         short_url = url_for('views.redirect_to_url', short_url=short_url, _external=True)
         return render_template('result.html', short_url=short_url, short_url_qr=short_url_qr)
-    return render_template('dashboard.html')
+    
 
+    # Retrieve the current user's URLs with associated click times
+    user = current_user._get_current_object()
+    urls = URL.query.filter_by(user_id=user.id).all()
+
+    click_times = []
+    for url in urls:
+        click_times.extend(url.click_times)
+
+    return render_template('dashboard.html', click_times=click_times)
 
 
 
 
 @views.route('/result', methods=['GET'])
+@cache.cached(timeout=60)  # Cache the result for 60 seconds
 @login_required
 def result():
     short_url = request.args.get('short_url')
-    original_url = request.args.get('original_url')
-    return render_template('result.html', short_url=short_url, original_url=original_url)
+
+    # Retrieve the analytics data for the current URL
+    url = URL.query.filter_by(short_url=short_url).first()
+    click_times = url.click_times if url else []
+
+    return render_template('result.html', short_url=short_url, click_times=click_times)
+
+
 
 
 
 @views.route('/<string:short_url>', methods=['GET'])
+@cache.cached(timeout=60)  # Cache the result for 60 seconds
 @login_required
 def redirect_to_url(short_url):
     long_url = url_dict.get(short_url)
@@ -75,3 +93,6 @@ def redirect_to_url(short_url):
         return redirect(long_url)
     else:
         abort(404)
+
+
+   

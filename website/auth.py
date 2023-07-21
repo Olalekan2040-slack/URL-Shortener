@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from website import db
+from website import db, cache
 from .models import User
 
 auth = Blueprint('auth', __name__)
@@ -11,6 +11,7 @@ def login():
     return render_template('login.html')
 
 @auth.route('/login', methods=['POST'])
+@cache.cached(timeout=60)  # Cache the result for 60 seconds
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -30,6 +31,7 @@ def signup():
     return render_template('signup.html')
 
 @auth.route('/signup', methods=['POST'])
+@cache.cached(timeout=60)  # Cache the result for 60 seconds
 def signup_post():
     username = request.form.get('username')
     email = request.form.get('email')

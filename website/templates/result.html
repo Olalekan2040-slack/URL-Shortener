@@ -66,6 +66,28 @@
     
     <br><br>
     <p>Click the link to redirect to the original URL.</p>
+
+
+
+    <h2>Analytics Data:</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Short URL</th>
+            <th>Click Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for click_time in click_times %}
+        <tr>
+            <td>{{ click_time.url.short_url }}</td>
+            <td>{{ click_time.click_time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
 </body>
 {%endblock%}
 </html>

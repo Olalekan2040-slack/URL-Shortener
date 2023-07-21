@@ -5,9 +5,11 @@ from flask_alembic import Alembic
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_qrcode import QRcode
+from flask_caching import Cache
 
 
 
+cache = Cache()
 db = SQLAlchemy()
 alembic = Alembic()
 migrate = Migrate()
@@ -19,12 +21,16 @@ def create_app():
     app.config['SECRET_KEY'] = 'ally'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(DB_NAME)  # Fix the format string
     'postgres://scissors_user:56UrctchR8HhrK0Vpw4LWuRCyceEyeD9@dpg-ci907at9aq0dcs9uuqk0-a/scissors'
+
+    app.config['CACHE_TYPE'] = 'simple'  # Using simple cache type for demonstration purposes
+    app.config['CACHE_DEFAULT_TIMEOUT'] = 300  # Cache timeout set to 300 seconds (5 minutes)
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     alembic.init_app(app)
     migrate.init_app(app, db)
     qrcode.init_app(app)
+    cache.init_app(app)
 
 
     #connection test
@@ -44,7 +50,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix= '/')
 
 
-    from .models import URL, User, Click
+    from .models import URL, User, ClickTime
 
 
 
