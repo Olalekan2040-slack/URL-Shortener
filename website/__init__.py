@@ -9,6 +9,8 @@ from flask_caching import Cache
 
 
 
+
+
 cache = Cache()
 db = SQLAlchemy()
 alembic = Alembic()
@@ -32,7 +34,7 @@ def create_app():
     qrcode.init_app(app)
     cache.init_app(app)
 
-
+    
     #connection test
     # with app.app_context():
     #     conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])

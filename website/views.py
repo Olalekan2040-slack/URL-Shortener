@@ -4,9 +4,12 @@ import random, string
 from flask_login import login_required, current_user
 from io import BytesIO
 import base64
-from website import cache
-from .models import ClickTime, URL
+from website import cache, db
+from .models import ClickTime, URL, User
 import qrcode
+
+
+
 
 views = Blueprint('views', __name__)
 
@@ -65,6 +68,34 @@ def dashboard():
 
     return render_template('dashboard.html', click_times=click_times)
 
+
+
+
+
+@views.route('/create-custom-url', methods=['GET', 'POST'])
+@login_required
+def create_custom_url():
+    if request.method == 'POST':
+        long_url = request.form['long_url']
+        custom_short_url = request.form['custom_short_url']  # Add custom_short_url to get the user's custom URL input
+        if not custom_short_url:
+            flash('Please provide a custom short URL.', 'warning')
+            return redirect(url_for('views.create_custom_url'))
+        
+        # Check if the custom short URL already exists in the URL dictionary
+        if custom_short_url in url_dict:
+            flash('Custom short URL already taken. Please choose a different one.', 'danger')
+            return redirect(url_for('views.create_custom_url'))
+
+        # Save the long_url and custom_short_url in the URL dictionary
+        url_dict[custom_short_url] = long_url
+
+        short_url_qr = generate_qr(custom_short_url)
+
+        short_url = url_for('views.redirect_to_url', short_url=custom_short_url, _external=True)
+        return render_template('result.html', short_url=short_url, short_url_qr=short_url_qr)
+
+    return render_template('create_custom_url.html')
 
 
 

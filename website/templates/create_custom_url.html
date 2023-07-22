@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Create Custom URL{% endblock %}
+
+{% block navbar %} {% endblock %}
+
+{% block hero %} {% endblock %}
+
+{% block content %}
+<body>
+
+    <header id="header" class="fixed-top " style="background-color: #37517e;">
+        <!-- Your header content here -->
+    </header>
+
+    <br>
+    <br>
+
+    <h1>URL Shortener - Create Custom URL</h1>
+    <form method="POST" action="{{ url_for('views.create_custom_url') }}">
+        <!-- Add the CSRF token as a hidden input field -->
+        
+        <label for="long_url">Long URL:</label>
+        <input type="text" name="long_url" required><br><br>
+        
+        <label for="custom_short_url">Custom Short URL:</label>
+        <input type="text" name="custom_short_url" required><br><br>
+        
+        <input type="submit" value="Shorten URL">
+    </form>
+</body>
+{% endblock %}
