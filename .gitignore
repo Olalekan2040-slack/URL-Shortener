@@ -1,7 +1,7 @@
 
 .instance/
 env/
-__pycache__/
+__pycache__
 alembic/
 database.db/
-cache/
+cache
