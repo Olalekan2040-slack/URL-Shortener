@@ -1,6 +1,7 @@
 
 .instance/
-env
+env/
 __pycache__/
-alembic
-database.db
+alembic/
+database.db/
+cache/
