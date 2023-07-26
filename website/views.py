@@ -25,12 +25,12 @@ def index():
 
 def generate_short_url():
     characters = string.ascii_letters + string.digits
-    short_url = ''.join(random.choice(characters) for _ in range(6))
+    short_url = ''.join(random.choice(characters) for _ in range(3))
     return short_url
 
 def generate_qr(data):
     qr = qrcode.QRCode(version=1,
-        box_size=10, 
+        box_size=5, 
         border=5)
     qr.add_data(data)
     qr.make(fit=True)

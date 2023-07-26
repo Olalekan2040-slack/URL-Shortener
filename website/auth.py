@@ -20,7 +20,7 @@ def login_post():
     user = User.query.filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
+        flash('Please check your login details and try again.', category='error')
         return redirect(url_for('auth.login'))
 
     login_user(user, remember=remember)
@@ -39,12 +39,12 @@ def signup_post():
 
     user = User.query.filter_by(username=username).first()
     if user:
-        flash('Usernane already exists')
+        flash('Username already exists',category='error')
         return redirect(url_for('auth.signup'))
     
     email_exists = User.query.filter_by(email=email).first()
     if email_exists:
-        flash("This email is already registered.")
+        flash("This email is already registered.", category='error')
         return redirect(url_for('auth.signup'))
     
 

@@ -1,17 +1,11 @@
 {%extends"base.html" %} {% block title%}Result{% endblock%}
-{%block navbar%}  {%endblock%}
+  
 {%block hero%}  {%endblock%}
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>URL Shortener - Result</title>
-</head>
 
-{%block content%}
-<body>
 
+{%block navbar%}
     <header id="header" class="fixed-top " style="background-color: #37517e;">
         <div class="container d-flex align-items-center">
     
@@ -22,9 +16,9 @@
           <nav id="navbar" class="navbar">
             <ul>
               <li><a class="nav-link scrollto active" href="{{url_for('views.index')}}">Home</a></li>
-              <li><a class="nav-link scrollto" href="#about">About</a></li>
+              <!-- <li><a class="nav-link scrollto" href="#about">About</a></li>
               <li><a class="nav-link scrollto" href="#services">Services</a></li>
-              <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
+              <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> -->
               <li><a class="nav-link scrollto" href="pricing">Pricing</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
@@ -52,22 +46,28 @@
     
         </div>
       </header><!-- End Header -->
+{%endblock%}
 
-<br>
-<br>
+{%block content%}
 
+<form method="POST">
+                    <section class="vh-100" style="background-color:  #37517e;">
+                      <div class="container py-5 h-100">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                              <div class="card-body p-5 text-center">
 
-    <h1>URL Shortener - Result</h1>
+                               
+
+    <h4>Shortened URL</h4>
     <p>Your QrCode is: </p>
     <img src="data:image/png;base64,{{ short_url_qr }}" alt="QR Code">
 
     <p>Your shortened URL:</p>
     <a href="{{ short_url }}">{{ short_url }}</a>  <!-- Display shortened URL as a hyperlink -->
     
-    <br><br>
     <p>Click the link to redirect to the original URL.</p>
-
-
 
     <h2>Analytics Data:</h2>
 <table>
@@ -88,6 +88,13 @@
 </table>
 
 <p>Need a custom Url? click <a href="{{url_for('views.create_custom_url')}}">here</p>
-</body>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</form>
+
+
 {%endblock%}
-</html>

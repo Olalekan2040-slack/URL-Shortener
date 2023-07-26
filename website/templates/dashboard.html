@@ -1,14 +1,7 @@
 {%extends"base.html" %} {% block title%}Dashboard{% endblock%}
-{%block navbar%}  {%endblock%}
-{%block hero%}  {%endblock%}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-{%block content%}
-<body>
+
+{%block navbar%}
     <header id="header" class="fixed-top " style="background-color: #37517e;">
         <div class="container d-flex align-items-center">
     
@@ -50,21 +43,48 @@
         </div>
       </header><!-- End Header -->
 
-<br>
-<br>
+{%endblock%}
 
+{%block hero%}  {%endblock%}
 
-    <h1>URL Shortener</h1>
+{%block content%}
+
+    <!-- <h1>URL Shortener</h1> -->
+
     <form method="POST" action="{{ url_for('views.dashboard') }}">
-        <input type="text" name="long_url" placeholder="Enter your long URL" required>
-        <input type="submit" value="Shorten">
+      <section class="vh-100" style="background-color:  #37517e;">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                  <div class="card-body p-5 text-center">
+
+
+                    <h3 class="mb-5">URL Shortener</h3>
+                    <div class="form-outline mb-4">
+        <input type="text" name="long_url" placeholder="Enter your long URL"  class="form-control form-control-lg" required>        
+        <br>
+        <input type="submit" value="Shorten" class="btn btn-primary btn-lg btn-block">
+                      </div>
+        
+      </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+        <div>
+          {% if short_url %}
+              <p>Your shortened URL is: <a href="{{ short_url }}">{{ short_url }}</a></p>
+          {% endif %}
+      </div>
+
+        </section>
     </form>
 
-    <div>
-        {% if short_url %}
-            <p>Your shortened URL is: <a href="{{ short_url }}">{{ short_url }}</a></p>
-        {% endif %}
-    </div>
+   
 </body>
+
 {%endblock%}
 </html>
