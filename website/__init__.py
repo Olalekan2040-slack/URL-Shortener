@@ -5,7 +5,7 @@ from flask_alembic import Alembic
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_qrcode import QRcode
-from flask_caching import Cache
+from flask_cache import Cache
 
 
 
