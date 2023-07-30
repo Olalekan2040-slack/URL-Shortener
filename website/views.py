@@ -125,5 +125,23 @@ def redirect_to_url(short_url):
     else:
         abort(404)
 
+#error handling
+@views.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
 
+
+
+@views.errorhandler(403)
+def page_not_found(error):
+    return "Access Denied,{}".format(error), 403
+
+
+@views.errorhandler(ValueError)
+def handle_value_error(error):
+    return "An error occurred: {}".format(error), 400
+
+@views.errorhandler(500)
+def internal_server_error(error):
+    return render_template('500.html'), 500
    
