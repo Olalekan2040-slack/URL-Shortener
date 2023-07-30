@@ -18,3 +18,4 @@ Werkzeug
 gunicorn
 Flask-QRcode
 Flask-Caching
+psycopg2
