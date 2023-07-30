@@ -5,7 +5,7 @@ from flask_alembic import Alembic
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_qrcode import QRcode
-from flask_cache import Cache
+from flask_caching import Cache
 
 
 
@@ -34,7 +34,7 @@ def create_app():
     alembic.init_app(app)
     migrate.init_app(app, db)
     qrcode.init_app(app)
-    cache.init_app(app)
+    # cache.init_app(app)
 
     
     #connection test

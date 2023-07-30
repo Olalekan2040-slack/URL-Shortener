@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\User\Desktop\url_shortener\env"
+VIRTUAL_ENV="C:\Users\User\Documents\URL-Shortener\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

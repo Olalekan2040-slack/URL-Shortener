@@ -116,7 +116,7 @@ def result():
 
 
 @views.route('/<string:short_url>', methods=['GET'])
-@cache.cached(timeout=60)  # Cache the result for 60 seconds
+# @cache.cached(timeout=60)  # Cache the result for 60 seconds
 @login_required
 def redirect_to_url(short_url):
     long_url = url_dict.get(short_url)
