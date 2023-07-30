@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
-
+    # is_verified = db.Column(db.Boolean, default=False)
     # Define the relationship to URLs with a custom backref name
     urls = db.relationship('URL', back_populates='user', lazy=True)
 
