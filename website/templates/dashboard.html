@@ -45,12 +45,11 @@
 
 {%endblock%}
 
-{%block hero%}  {%endblock%}
+{%block hero%} {%endblock%}
 
 {%block content%}
-
-    <!-- <h1>URL Shortener</h1> -->
-
+   
+    <h6 align="right">{{ current_user.username }}!</h6>
     <form method="POST" action="{{ url_for('views.dashboard') }}">
       <section class="vh-100" style="background-color:  #37517e;">
           <div class="container py-5 h-100">
@@ -58,9 +57,9 @@
               <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                   <div class="card-body p-5 text-center">
+                    <h2 align="center"><b>Welcome, {{ current_user.username }}!</b></h2>
 
-
-                    <h3 class="mb-5">URL Shortener</h3>
+                    <h4 class="mb-5">URL Shortener</h4>
                     <div class="form-outline mb-4">
         <input type="text" name="long_url" placeholder="Enter your long URL"  class="form-control form-control-lg" required>        
         <br>
@@ -87,4 +86,5 @@
 </body>
 
 {%endblock%}
+
 </html>

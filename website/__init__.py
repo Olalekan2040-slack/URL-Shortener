@@ -18,13 +18,18 @@ migrate = Migrate()
 DB_NAME = "database.db"
 qrcode = QRcode()
 
+dev = "ye"
+
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'ally'
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://scissors_user:56UrctchR8HhrK0Vpw4LWuRCyceEyeD9@dpg-ci907at9aq0dcs9uuqk0-a.oregon-postgres.render.com/scissors"
-    
+    if dev == "No":
+        app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://scissors_user:56UrctchR8HhrK0Vpw4LWuRCyceEyeD9@dpg-ci907at9aq0dcs9uuqk0-a.oregon-postgres.render.com/scissors"
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(DB_NAME) 
+
      # Fix the format string
-    'sqlite:///{}'.format(DB_NAME) 
+    
 
     app.config['CACHE_TYPE'] = 'simple'  # Using simple cache type for demonstration purposes
     app.config['CACHE_DEFAULT_TIMEOUT'] = 300  # Cache timeout set to 300 seconds (5 minutes)
